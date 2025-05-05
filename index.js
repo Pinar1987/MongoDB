@@ -16,6 +16,12 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
+app.get("/users", async (req, res) => {
+  const users = await User.find();
+  res.json(users);
+});
+
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
