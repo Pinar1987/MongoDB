@@ -27,6 +27,17 @@ app.post("/users", async (req, res) => {
   res.status(201).json(newUser);
 });
 
+app.put("/users/:id", async (req, res) => {
+  const { id } = req.params;
+  const updatedData = req.body;
+  const updatedUser = await User.findByIdAndUpdate(id, updatedData, { new: true });
+  if (!updatedData) {
+    return res.status(404).json({ error: "item not found" })
+  }
+  res.json(updatedUser);
+});
+
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
