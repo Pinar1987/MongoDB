@@ -21,6 +21,11 @@ app.get("/users", async (req, res) => {
   res.json(users);
 });
 
+app.post("/users", async (req, res) => {
+  const newUser = new User(req.body);
+  await newUser.save();
+  res.status(201).json(newUser);
+});
 
 const PORT = 3000;
 app.listen(PORT, () => {
